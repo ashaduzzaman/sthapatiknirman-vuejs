@@ -1,6 +1,6 @@
 <template>
   <div>
-      <banner-section/>
+      <slider-section/>
       <our-best-work/>
       <our-services/>
       <footer-section/>
@@ -8,14 +8,14 @@
 </template>
 
 <script>
-import BannerSection from '../components/BannerSection'
+import SliderSection from '../components/SliderSection'
 import OurServices from '../components/OurServices'
 import OurBestWork from '../components/OurBestWork'
 import FooterSection from '../components/FooterSection'
 
 export default {
     components: {
-        BannerSection,
+        SliderSection,
         OurServices,
         OurBestWork,
         FooterSection

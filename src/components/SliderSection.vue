@@ -7,9 +7,9 @@
       :interval="interval"
     >
         <v-carousel-item
-          v-for="(item, i) in items"
-          :key="i"
-          :src = "item.src"
+          v-for="item in banner_data"
+          :key="item.id"
+          :src = "item.image_path"
           eager
           transition="slide-y-reverse-transition"
           reverse-transition="scale-transition"
@@ -22,6 +22,7 @@
 
 <script>
 export default {
+      props: ['banner_data'],
     data: () => ({
       sticky: true,
       interval: 1800,

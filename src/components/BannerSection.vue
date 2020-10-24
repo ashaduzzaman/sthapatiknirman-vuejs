@@ -13,10 +13,10 @@
                     cols="12"
                 >
                     <h1 class="display-1 font-weight-thin mb-4">
-                        Vuetify
+                        Contact Us
                     </h1>
                     <h4 class="subheading">
-                        Build your application today!
+                        If you want to reach us
                     </h4>
                 </v-col>
             </v-row>
@@ -26,6 +26,9 @@
 
 <script>
     export default {
+        data: () => ({
+
+        }),
         
     }
 </script>

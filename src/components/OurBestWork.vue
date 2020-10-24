@@ -9,17 +9,17 @@
         </v-layout>
         <v-container fluid>
             <v-row class="mt-5 ml-10 mr-10">
-                <v-col v-for="item in feedImages" :key="item.id">
+                <v-col v-for="item in best_work_data" :key="item.id">
                     <v-hover v-slot:default="{ hover }">
                         <v-card elevation="12" class="mx-auto" max-width="344" color="blue" @click.native="OpenDialogBox(item)">
-                            <v-img height="280" :src="item.src">
+                            <v-img height="280" :src="item.thumbnail_image">
                                 <v-expand-transition>
                                     <div
                                         v-if="hover"
                                         class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-3 white--text"
                                         style="height: 100%;"
                                     >
-                                        {{ item.type }}
+                                        {{ item.project_category.name }}
                                     </div>
                                 </v-expand-transition>
                             </v-img>
@@ -37,11 +37,11 @@
             
                 <div style="background-color: white;">
                     <v-img
-                    :src="detailsModal.src"
+                    :src="detailsModal.thumbnail_image"
                     height="500px"
                     >
                         <div class="l-section-overlay"></div>
-                        <div class="centered" style="color:white;">{{ detailsModal.title }}</div>
+                        <div class="centered" style="color:white;">{{ detailsModal.name }}</div>
                         <v-row>
                             <v-col class="text-right">
                                 <v-btn
@@ -73,28 +73,34 @@
                                                     <v-icon>mdi-account</v-icon>
                                                 </v-list-item-icon>
                                                 <v-list-item-content>
-                                                    <v-list-item-title>Three-line item</v-list-item-title>
+                                                    <v-list-item-title>Main Architect</v-list-item-title>
                                                     <v-list-item-subtitle>
-                                                    Secondary line text Lorem ipsum dolor sit amet,
-                                                    </v-list-item-subtitle>
-                                                    <v-list-item-subtitle>
-                                                    consectetur adipiscing elit.
+                                                    {{ detailsModal.main_architect }}
                                                     </v-list-item-subtitle>
                                                 </v-list-item-content>
                                             </v-list-item>
                                         </v-list>
-                                        <v-list>
-                                            <v-list-item three-line>
+                                        <v-list class="team_members_title">
+                                            <v-list-item>
                                                 <v-list-item-icon>
                                                     <v-icon>mdi-account</v-icon>
                                                 </v-list-item-icon>
                                                 <v-list-item-content>
-                                                    <v-list-item-title>Three-line item</v-list-item-title>
+                                                    <v-list-item-title>Team Members</v-list-item-title>
+                                                </v-list-item-content>
+                                            </v-list-item>
+                                        </v-list>
+                                        <v-list class="team_members">
+                                            <v-list-item
+                                            v-for="(item, i) in detailsModal.team_members"
+                                            :key="i"
+                                            >
+                                                <v-list-item-icon>
+                                                    <v-icon></v-icon>
+                                                </v-list-item-icon>
+                                                <v-list-item-content class="team_members_content">
                                                     <v-list-item-subtitle>
-                                                    Secondary line text Lorem ipsum dolor sit amet,
-                                                    </v-list-item-subtitle>
-                                                    <v-list-item-subtitle>
-                                                    consectetur adipiscing elit.
+                                                        {{ item }}
                                                     </v-list-item-subtitle>
                                                 </v-list-item-content>
                                             </v-list-item>
@@ -102,11 +108,11 @@
                                     </v-col>
                                 </v-row>
                             </v-layout>
-                            <div class="">
+                            <div>
                                 <h2 class="mb-5">Project Images</h2>
                                 <v-row>
-                                    <v-col v-for="(image, i) in galleryImages" :key="i">
-                                        <v-img width="350" height="350" :src="image.urls.small" :alt="image.alt_description" @click="getId(image)"></v-img>
+                                    <v-col v-for="image in detailsModal.photos" :key="image.id">
+                                        <v-img width="350" height="350" :src="'http://127.0.0.1:8000'+image.image_path" alt="images" @click="getId(image)"></v-img>
                                     </v-col>
                                 </v-row>
                             </div>
@@ -141,6 +147,7 @@
 export default {
     components: {
     },
+    props: ['best_work_data'],
     data:() => ({
         feedImages: [
             {
@@ -262,11 +269,13 @@ export default {
                 }
 
             })
+            console.log(item);
             this.detailsModal = item;
             this.dialog = true;
         },
         getId(image){
-            this.singleImage = image.urls.small
+            console.log(image)
+            this.singleImage = 'http://127.0.0.1:8000'+image.image_path
             this.dialogImage = true
         }
     }
@@ -302,5 +311,15 @@ export default {
     font-size: 18px; 
     background-color: #42b983; 
     color: white; padding: 10px 20px;
+}
+
+.team_members{
+    padding: 0px !important;
+}
+.team_members_title{
+    padding: 0px !important;
+}
+.team_members_content{
+    padding: 0px !important;
 }
 </style>

@@ -53,10 +53,12 @@
       <!-- <HomePage/> -->
       <router-view/>
     </v-main>
+      <footer-section/>
   </v-app>
 </template>
 
 <script>
+import FooterSection from './components/FooterSection'
 // import HelloWorld from './components/HelloWorld';
 // import ProfilePage from './pages/ProfilePage'
 // import MainNav from './components/MainNav'
@@ -67,6 +69,7 @@ export default {
   name: 'App',
 
   components: {
+        FooterSection
     // ProfilePage,
     // HomePage,
     // MainNav,

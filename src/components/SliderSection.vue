@@ -9,7 +9,7 @@
         <v-carousel-item
           v-for="item in banner_data"
           :key="item.id"
-          :src = "item.image_path"
+          :src = "process.env.VUE_APP_IMG_URL+item.image_path"
           eager
           transition="slide-y-reverse-transition"
           reverse-transition="scale-transition"

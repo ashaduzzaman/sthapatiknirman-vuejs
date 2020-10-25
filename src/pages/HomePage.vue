@@ -26,7 +26,6 @@ export default {
             this.banner_data = response.data;
         });
         await this.axios.get(process.env.VUE_APP_API_URL+'/recent-project').then((response)=> {
-            console.log(response.data);
             this.best_work_data = response.data;
         });
     }

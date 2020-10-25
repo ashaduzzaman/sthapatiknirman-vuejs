@@ -12,7 +12,7 @@
                 <v-col v-for="item in best_work_data" :key="item.id">
                     <v-hover v-slot:default="{ hover }">
                         <v-card elevation="12" class="mx-auto" max-width="344" color="blue" @click.native="OpenDialogBox(item)">
-                            <v-img height="280" :src="item.thumbnail_image">
+                            <v-img height="280" :src="process.env.VUE_APP_IMG_URL+item.thumbnail_image">
                                 <v-expand-transition>
                                     <div
                                         v-if="hover"
@@ -37,7 +37,7 @@
             
                 <div style="background-color: white;">
                     <v-img
-                    :src="detailsModal.thumbnail_image"
+                    :src="process.env.VUE_APP_IMG_URL+detailsModal.thumbnail_image"
                     height="500px"
                     >
                         <div class="l-section-overlay"></div>
@@ -112,7 +112,7 @@
                                 <h2 class="mb-5">Project Images</h2>
                                 <v-row>
                                     <v-col v-for="image in detailsModal.photos" :key="image.id">
-                                        <v-img width="350" height="350" :src="'http://127.0.0.1:8000'+image.image_path" alt="images" @click="getId(image)"></v-img>
+                                        <v-img width="350" height="350" :src="process.env.VUE_APP_IMG_URL++image.image_path" alt="images" @click="getId(image)"></v-img>
                                     </v-col>
                                 </v-row>
                             </div>
@@ -275,7 +275,7 @@ export default {
         },
         getId(image){
             console.log(image)
-            this.singleImage = 'http://127.0.0.1:8000'+image.image_path
+            this.singleImage = process.env.VUE_APP_IMG_URL+image.image_path
             this.dialogImage = true
         }
     }

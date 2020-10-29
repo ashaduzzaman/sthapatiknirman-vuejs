@@ -2,28 +2,33 @@
     <v-container>
         <v-layout class="pa-5">
             <v-flex text-center>
-                <h2 class="section-title"><b>Recent</b> Projects</h2>
+                <!-- <div class="section-subtitle title">Our Works</div> -->
+                <h4 class="section-title">Projects</h4>
                 <div class="theme-separator-line-horrizontal-full"></div>
             </v-flex>
         </v-layout>
         <v-container fluid>
-            <v-row class="ml-10 mr-10">
-                <v-col v-for="item in best_work_data" :key="item.id">
-                    <v-hover v-slot:default="{ hover }">
-                        <v-card elevation="12" class="mx-auto" max-width="344" color="blue" @click.native="OpenDialogBox(item)">
-                            <v-img height="280" :src="image_base_url+item.thumbnail_image">
-                                <v-expand-transition>
-                                    <div
-                                        v-if="hover"
-                                        class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-3 white--text"
-                                        style="height: 100%;"
-                                    >
-                                        {{ item.name }}
-                                    </div>
-                                </v-expand-transition>
-                            </v-img>
-                        </v-card>
-                    </v-hover>
+            <v-row>
+                <v-col>
+                    <v-row class="mt-5">
+                        <v-col v-for="item in projects" :key="item.id">
+                            <v-hover v-slot:default="{ hover }">
+                                <v-card elevation="12" class="mx-auto" max-width="344" color="blue" @click.native="OpenDialogBox(item)">
+                                    <v-img height="280" :src="image_base_url+item.thumbnail_image">
+                                        <v-expand-transition>
+                                            <div
+                                                v-if="hover"
+                                                class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-3 white--text"
+                                                style="height: 100%;"
+                                            >
+                                                {{ item.name }}
+                                            </div>
+                                        </v-expand-transition>
+                                    </v-img>
+                                </v-card>
+                            </v-hover>
+                        </v-col>
+                    </v-row>
                 </v-col>
             </v-row>
         </v-container>
@@ -142,73 +147,39 @@
 </template>
 
 <script>
-
-export default {
-    components: {
-    },
-    props: ['best_work_data'],
-    data:() => ({
-        dialog: false,
-        dialogImage: false,
-        detailsModal : "",
-        singleImage: "",
-        galleryImages: [],
-        image_base_url: "",
-    }),
-    created(){
-        this.image_base_url = process.env.VUE_APP_IMG_URL;
-    },
-    methods: {
+    export default {
+        data: () => ({
+            dialog: false,
+            dialogImage: false,
+            detailsModal : "",
+            singleImage: "",
+            projects: "",
+            image_base_url: ""
+        }),
+        async created(){
+            // this.progressbar = true;
+            console.log(this.$route.params.id);
+                await this.axios.get(process.env.VUE_APP_API_URL+'/project-category/'+this.$route.params.id).then((response)=> {
+                    console.log(response.data);
+                    this.projects = response.data;
+                });
+            this.image_base_url = process.env.VUE_APP_IMG_URL;
+        },
+        methods: {
         OpenDialogBox(item){
+            console.log(item);
             this.detailsModal = item;
             this.dialog = true;
         },
         getId(image){
-            this.singleImage = process.env.VUE_APP_IMG_URL+image.image_path
+            console.log(image)
+            this.singleImage = this.image_base_url+image.image_path
             this.dialogImage = true
         }
     }
-}
+    }
 </script>
 
-<style>
-.v-card{
-    cursor:pointer;
-}
+<style lang="scss" scoped>
 
-.l-section-overlay {
-    position: absolute;
-    background-color: rgba(0,0,0,0.3);
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.container { 
-    width: 80vw; 
-    margin: 0 auto; 
-}
-
-.button-wrapper { 
-    display: flex; 
-    justify-content: center; 
-    margin-bottom: 25px; 
-}
-
-.btn { 
-    font-size: 18px; 
-    background-color: #42b983; 
-    color: white; padding: 10px 20px;
-}
-
-.team_members{
-    padding: 0px !important;
-}
-.team_members_title{
-    padding: 0px !important;
-}
-.team_members_content{
-    padding: 0px !important;
-}
 </style>

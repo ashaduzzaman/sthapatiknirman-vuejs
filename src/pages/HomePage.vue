@@ -2,19 +2,19 @@
   <div>
       <slider-section :banner_data = "banner_data"/>
       <our-best-work :best_work_data="best_work_data"/>
-      <our-services/>
+      <!-- <our-services/> -->
   </div>
 </template>
 
 <script>
 import SliderSection from '../components/SliderSection'
-import OurServices from '../components/OurServices'
+// import OurServices from '../components/OurServices'
 import OurBestWork from '../components/OurBestWork'
 
 export default {
     components: {
         SliderSection,
-        OurServices,
+        // OurServices,
         OurBestWork,
     },
     data: () => ({

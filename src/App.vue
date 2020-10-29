@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="sidebar" app>
+    <v-navigation-drawer v-model="sidebar" app temporary class='mt-5' style='top: 50px' dark right>
       <v-list>
         <v-list-item v-for="item in menuItems" :key="item.title" :to="item.path">
           <v-list-item-action>
@@ -13,28 +13,30 @@
 
     <v-app-bar 
       flat 
-      dark 
-      shrink-on-scroll
-      prominent 
+      dark
       dense 
       app 
       class="pl-5 pr-5"
+      height="70"
     >
       
-      <!-- <v-toolbar-title> -->
           <img
-            src="@/assets/instagram.png"
-            alt="RTS ENVIRONMENTAL SERVICES, INC."
-            class="mt-4 hidden-sm-and-down"
-            width="100"
+            src="@/assets/logo.png"
+            alt="Sthapatik Nirman"
+            class="mx-2 hidden-sm-and-down"
+            max-width="40"
+            max-height="40"
           />
           <img
-            src="@/assets/instagram.png"
-            alt="RTS ENVIRONMENTAL SERVICES, INC."
-            class="mt-3 hidden-md-and-up"
-            height="30px"
+            src="@/assets/logo.png"
+            alt="Sthapatik Nirman"
+            class="mx-2 hidden-md-and-up"
+            max-width="30"
+            max-height="30"
           />
-      <!-- </v-toolbar-title> -->
+      <v-toolbar-title>
+        Sthapatik Nirman
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
         <v-btn text v-for="item in menuItems" :key="item.title" :to="item.path">
@@ -111,5 +113,55 @@ a.v-btn.v-btn--router:after {
 
 a.v-btn.v-btn--router:hover::after{
   transform: scaleY(1);
+}
+
+.v-list .v-list-item--active {
+  background-color:#ffc13b !important;
+  color: black !important;
+}
+
+.v-toolbar__title{
+  font-family: cursive;
+}
+
+.theme-separator-line-horrizontal-full {
+    background-color: #ffc13b;
+    width: 100%;
+    height: 0.25rem;
+    width: 5.25rem;
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.938rem;
+}
+
+.section-title{
+    margin: 0rem;
+    font-size: 2rem;
+    line-height: 1.3;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.card-hover {
+  transition: transform 1s;
+}
+
+.card-hover:hover {
+  transform: translate(0px, -20px);
+}
+
+.v-card--reveal {
+    align-items: center;
+    bottom: 0;
+    justify-content: center;
+    opacity: .5;
+    position: absolute;
+    width: 100%;
+}
+
+.v-application--wrap {
+    min-height: 100vh;
+    justify-content: center;
 }
 </style>

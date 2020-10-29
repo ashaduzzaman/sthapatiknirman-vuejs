@@ -9,7 +9,7 @@
         <v-carousel-item
           v-for="item in banner_data"
           :key="item.id"
-          :src = "process.env.VUE_APP_IMG_URL+item.image_path"
+          :src = "image_base_url+item.image_path"
           eager
           transition="slide-y-reverse-transition"
           reverse-transition="scale-transition"
@@ -25,22 +25,12 @@ export default {
       props: ['banner_data'],
     data: () => ({
       sticky: true,
-      interval: 1800,
-      items: [
-          {
-            src: "https://images.unsplash.com/photo-1535406208535-1429839cfd13?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80",
-          },
-          {
-            src: 'https://images.unsplash.com/photo-1554941071-8ec75d5379b5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-          },
-          {
-            src: 'https://images.unsplash.com/photo-1554941426-e9604e34bc94?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-          },
-          {
-            src: 'https://images.unsplash.com/photo-1593016250787-edf25b355001?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-          },
-        ],
+      interval: 2000,
+      image_base_url: "",
     }),
+    created(){
+      this.image_base_url = process.env.VUE_APP_IMG_URL;
+    }
 }
 </script>
 
@@ -58,20 +48,20 @@ export default {
 @media only screen and (min-width: 960px) {
         /* styles for browsers larger than 960px; */
   .v-carousel{
-    height: 350px !important;
+    height: 300px !important;
   }
   .v-carousel .v-carousel__item{
-    height: 350px !important;
+    height: 300px !important;
     background: rgba(0, 0, 0, 0.5);
   }
 }
 @media only screen and (min-width: 1440px) {
     /* styles for browsers larger than 1440px; */
   .v-carousel{
-    height: 600px !important;
+    height: 550px !important;
   }
   .v-carousel .v-carousel__item{
-    height: 600px !important;
+    height: 550px !important;
     background: rgba(0, 0, 0, 0.5);
   }
 }
